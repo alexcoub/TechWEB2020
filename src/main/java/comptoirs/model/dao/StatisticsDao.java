@@ -1,11 +1,13 @@
 package comptoirs.model.dao;
 
 import comptoirs.model.dto.StatsResult;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import util.HtmlSqlDate;
 
 @Stateless
 public class StatisticsDao {
@@ -53,4 +55,23 @@ public class StatisticsDao {
 		List<StatsResult> results = query.setParameter("code", codeCategorie).getResultList();
 		return results;
 	}
+        
+        public HtmlSqlDate datePlusRecenteCommande() {
+            Date result = em.createQuery("select max(c.saisieLe) from Commande c", Date.class)
+            .getSingleResult();
+            return new HtmlSqlDate(result);
+        }
+        
+        public Date datePlusAncienneCommande() {
+            Date result =  em.createQuery("select min(c.saisieLe) from Commande c", Date.class)
+            .getSingleResult();
+            return new HtmlSqlDate(result);
+        }
+
+        public List<Integer> commandesEntre(Date minDate, Date maxDate) {
+            return em.createQuery("select c.numero from Commande c where c.saisieLe between :minDate and :maxDate", Integer.class)
+                    .setParameter("minDate", minDate)
+                    .setParameter("maxDate", maxDate)
+                    .getResultList();
+        }
 }
