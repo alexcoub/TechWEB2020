@@ -11,11 +11,11 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.8.1/mustache.min.js"></script>		
 
         <script>
-            $(document).ready(// Exécuté à la fin du chargement de la page
+            $(document).ready(// On exécute l'appel AJAX dès la fin du chargement de la page
                     doRequest
             );
 
-            // On reçoit un tableau de nuéros de commande
+            // On reçoit un tableau de numéros de commande
             function showResult(tableauCommandes) {
                // Le code source du template est dans la page
                 var template = $('#commandesTemplate').html();
@@ -61,16 +61,18 @@
                     Numéros :
                     {{! Pour chaque numéro de commande }}
                     {{#commandes}} {{.}}, {{/commandes}}
-                    {{! le point représente l élément courant du tableau}}
+                    {{! commandes est un tableau, en Mustache le point représente l élément courant du tableau}}
             </div>
         </script>	            
         <a href="${pageContext.request.contextPath}/">Retour au menu</a>
         <hr>
-        <a href="service/commandesFiltrees?minDate=1994-08-04&maxDate=1995-08-04"  target="_blank">Le service utilisé.</a>
+        <a href="service/commandesFiltrees?minDate=1994-08-04&maxDate=1995-08-04"  target="_blank">Le service utilisé par l'appel AJAX</a>
         <h3>Code source</h3>
         <ul>
-            <li><a href="https://bitbucket.org/rbastide/comptoirs_mvc/src/test/src/main/java/controller/CategorieController.java"  target="_blank">Le contrôleur</a></li>
-            <li><a href="https://bitbucket.org/rbastide/comptoirs_mvc/src/test/src/main/webapp/WEB-INF/views/showAllCategories.jsp"  target="_blank">La vue</a></li>
+            <li><a href="https://bitbucket.org/rbastide/comptoirs_mvc/src/test/src/main/java/controller/ListeCommandeController.java"  target="_blank">Le contrôleur</a></li>
+            <li><a href="https://bitbucket.org/rbastide/comptoirs_mvc/src/test/src/main/webapp/WEB-INF/views/listeCommandes.jsp"  target="_blank">La vue</a></li>
+            <li><a href="https://bitbucket.org/rbastide/comptoirs_mvc/src/test/src/main/java/comptoirs/model/dao/StatisticsDao.java"  target="_blank">Le DAO avec les requêtes nécessaires</a></li>
+            <li><a href="https://bitbucket.org/rbastide/comptoirs_mvc/src/test/src/main/java/service/StatisticsService.java"  target="_blank">Le service qui fournit les données fltrées par date</a></li>
         </ul>
 </body>
 
