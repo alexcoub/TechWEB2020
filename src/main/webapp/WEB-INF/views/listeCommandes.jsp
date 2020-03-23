@@ -17,7 +17,7 @@
 				if (tableauCommandes.length) { // On a trouvé des commandes dans l'intervalle
 					message = 'Les commandes de '
 						+ tableauCommandes[0] + ' à '
-						+ tableauCommandes[tableauCommandes.length - 1] + ' sont dans cet intervalle '
+						+ tableauCommandes[tableauCommandes.length - 1] + ' sont dans cet intervalle ';
 				}
 				// On affiche le résultat dans la page
 				$('#resultat').html(message);
