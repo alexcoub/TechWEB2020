@@ -6,7 +6,9 @@
 package controller;
 
 import comptoirs.model.dao.ClientFacade;
+import comptoirs.model.dao.UtilisateurFacade;
 import comptoirs.model.entity.Client;
+import comptoirs.model.entity.Utilisateur;
 import javax.inject.Inject;
 import javax.mvc.Controller;
 import javax.mvc.View;
@@ -25,6 +27,9 @@ public class AccueilController {
     
     @Inject
     ClientFacade client;
+    
+    @Inject
+    UtilisateurFacade user;
     
     @GET
     public void show(@QueryParam("id") String identifiant,
@@ -47,7 +52,17 @@ public class AccueilController {
             String telephone = c.getTelephone();
             String fax = c.getFax();
             
-            if(login.equals(loginParam) && mdp.equals(mdpParam)) {
+            if(login.equals(loginParam) && mdp.equals(mdpParam)) { 
+                Utilisateur u = new Utilisateur(mdp);
+                u.setSociete(societe);
+                u.setContact(login);
+                u.setFonction(fonction);
+                u.setAdresse(adresse);
+                u.setVille(ville);
+                u.setCodePostal(codepostal);
+                u.setPays(pays);
+                u.setTelephone(telephone);
+                u.setFax(fax);
                 
             }
         }
