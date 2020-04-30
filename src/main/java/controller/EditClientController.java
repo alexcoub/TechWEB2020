@@ -11,7 +11,6 @@ import javax.ws.rs.Path;
 import comptoirs.model.entity.Client;
 import javax.mvc.View;
 import javax.mvc.binding.BindingResult;
-import javax.persistence.EntityManager;
 import javax.validation.executable.ExecutableType;
 import javax.validation.executable.ValidateOnExecution;
 import javax.ws.rs.FormParam;
@@ -21,27 +20,25 @@ import javax.ws.rs.FormParam;
 @View("editClient.jsp")
 //@TransactionManagement(TransactionManagementType.BEAN)
 public class EditClientController {
-
+    
     @Inject
     ClientFacade dao;
     
-    @Inject
-    EntityManager em;
-
+    
     @Inject
     BindingResult formValidationErrors;
-
+    
     @Inject
     Models models;
-
+    
     @GET
     public void show() {
         models.put("clients", dao.find("ALFKI"));
     }
-
+    
     @POST
     @ValidateOnExecution(type = ExecutableType.ALL)
-    public String modifier(
+    public void modifier(
             @FormParam("societe") String societe,
             @FormParam("contact") String contact,
             @FormParam("fonction") String fonction,
@@ -57,46 +54,45 @@ public class EditClientController {
         if (adresse != null) {
             client.setAdresse(adresse);
         }
-
+        
         if (codePostal != null) {
             client.setCodePostal(codePostal);
         }
-
-        if (contact!= null) {
-            client.setContact(contact);
+        
+        if (contact != null) {
+            client.setContact(fonction);
         }
-
+        
         if (fax != null) {
             client.setFax(fax);
         }
-
+        
         if (fonction != null) {
             client.setFonction(fonction);
         }
-
+        
         if (pays != null) {
             client.setPays(pays);
         }
-
+        
         if (region != null) {
-             client.setRegion(region);
+            client.setRegion(region);
         }
-
+        
         if (societe != null) {
             client.setSociete(societe);
         }
-
-        if (telephone!= null) {
+        
+        if (telephone != null) {
             client.setTelephone(telephone);
         }
         
-        if (ville!= null) {
+        if (ville != null) {
             client.setVille(ville);
         }
-
+        dao.edit(client);
+        models.put("clients", dao.find("ALFKI"));
         
         
-
-        return "redirect:/editClient";
     }
 }
