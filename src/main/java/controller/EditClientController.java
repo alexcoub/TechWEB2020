@@ -20,22 +20,18 @@ import javax.ws.rs.FormParam;
 @View("editClient.jsp")
 //@TransactionManagement(TransactionManagementType.BEAN)
 public class EditClientController {
-    
+
     @Inject
     ClientFacade dao;
-    
-    
-    @Inject
-    BindingResult formValidationErrors;
-    
+
     @Inject
     Models models;
-    
+
     @GET
     public void show() {
-        models.put("clients", dao.find("ALFKI"));
+        models.put("clients", dao.find("BOTTM"));
     }
-    
+
     @POST
     @ValidateOnExecution(type = ExecutableType.ALL)
     public void modifier(
@@ -50,49 +46,21 @@ public class EditClientController {
             @FormParam("telephone") String telephone,
             @FormParam("fax") String fax
     ) {
-        Client client = dao.find("ALFKI");
-        if (adresse != null) {
-            client.setAdresse(adresse);
-        }
-        
-        if (codePostal != null) {
-            client.setCodePostal(codePostal);
-        }
-        
-        if (contact != null) {
-            client.setContact(fonction);
-        }
-        
-        if (fax != null) {
-            client.setFax(fax);
-        }
-        
-        if (fonction != null) {
-            client.setFonction(fonction);
-        }
-        
-        if (pays != null) {
-            client.setPays(pays);
-        }
-        
-        if (region != null) {
-            client.setRegion(region);
-        }
-        
-        if (societe != null) {
-            client.setSociete(societe);
-        }
-        
-        if (telephone != null) {
-            client.setTelephone(telephone);
-        }
-        
-        if (ville != null) {
-            client.setVille(ville);
-        }
+        Client client = dao.find("BOTTM");
+
+        client.setAdresse(adresse);
+        client.setCodePostal(codePostal);
+        client.setContact(fonction);
+        client.setFax(fax);
+        client.setFonction(fonction);
+        client.setPays(pays);
+        client.setRegion(region);
+        client.setSociete(societe);
+        client.setTelephone(telephone);
+        client.setVille(ville);
+
         dao.edit(client);
-        models.put("clients", dao.find("ALFKI"));
-        
-        
+        models.put("clients", dao.find("BOTTM"));
+
     }
 }
