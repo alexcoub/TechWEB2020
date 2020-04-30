@@ -8,18 +8,18 @@
     <body>
         <h1>Modification de vos paramètres</h1>
         <form method='POST'> 	<%-- L'action par défaut est de revenir à l'URL du contrôleur --%>
-            Fonction : <input name="fonction" placeholder="Veuillez renseigner votre nouvelle fonction"><br>
-            Société : <input name="societe" placeholder="Veuillez renseigner votre nouvelle société"><br>
+            Fonction : <input name="fonction" value=${mvc.encoders.html(clients.fonction)}><br>
+            Société : <input name="societe" value=${mvc.encoders.html(clients.societe)}><br>
 
-            Adresse : <input name="adresse" placeholder="Veuillez renseigner votre nouvelle adresse"><br>
-            Ville : <input name="ville" placeholder="Veuillez renseigner votre nouvelle ville"><br>
-            Région : <input name="region" placeholder="Veuillez renseigner votre nouvelle région"><br>
-            Code Postal : <input name="codePostal" placeholder="Veuillez renseigner votre noueau code postal"><br>
-            Pays : <input name="pays" placeholder="Veuillez renseigner votre nouveau pays"><br>
+            Adresse : <input name="adresse" value=${mvc.encoders.html(clients.adresse)}><br>
+            Ville : <input name="ville" value=${mvc.encoders.html(clients.ville)}><br>
+            Région : <input name="region" value=${mvc.encoders.html(clients.region)}><br>
+            Code Postal : <input name="codePostal" value=${mvc.encoders.html(clients.codePostal)}><br>
+            Pays : <input name="pays" value=${mvc.encoders.html(clients.pays)}><br>
 
-            Contact : <input name="contact" placeholder="Veuillez renseigner votre nouveau contact"><br>           
-            Téléphone : <input name="telephone" placeholder="Veuillez renseigner votre nouveau numéro"><br>
-            Fax : <input name="fax" placeholder="Veuillez renseigner votre nouvelle adresse pour le fax"><br>
+            Contact : <input name="contact" value=${mvc.encoders.html(clients.contact)}><br>           
+            Téléphone : <input name="telephone" value=${mvc.encoders.html(clients.telephone)}><br>
+            Fax : <input name="fax" value=${mvc.encoders.html(clients.fax)}><br>
             
             <input type="submit" value="Validation">
         </form>
