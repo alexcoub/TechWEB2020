@@ -50,7 +50,7 @@ public class EditClientController {
 
         client.setAdresse(adresse);
         client.setCodePostal(codePostal);
-        client.setContact(fonction);
+        client.setContact(contact);
         client.setFax(fax);
         client.setFonction(fonction);
         client.setPays(pays);

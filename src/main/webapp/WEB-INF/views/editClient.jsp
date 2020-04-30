@@ -17,7 +17,7 @@
             Code Postal : <input name="codePostal" value=${mvc.encoders.html(clients.codePostal)}><br>
             Pays : <input name="pays" value=${mvc.encoders.html(clients.pays)}><br>
 
-            Contact : <input name="contact" value=${mvc.encoders.html(clients.contact)}><br>           
+            Contact : <input name="contact" value=${mvc.encoders.html(clients.contact.toString())}><br>           
             Téléphone : <input name="telephone" value=${mvc.encoders.html(clients.telephone)}><br>
             Fax : <input name="fax" value=${mvc.encoders.html(clients.fax)}><br>
             
