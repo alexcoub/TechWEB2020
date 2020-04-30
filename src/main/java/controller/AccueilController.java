@@ -72,12 +72,8 @@ public class AccueilController {
             
             //Vérifier que la combinaiason login/mdp correspond à la combinaison contact/code
             if(login.equals(loginParam) && mdp.equals(mdpParam)) { 
-                
-                //Vider la table utilisateur
-                List<Utilisateur> lu = user.findAll();
-                for(Utilisateur u : lu) {
-                    user.remove(u);
-                }
+                //Supprimer l'utilisateur actuel (déconnexion)
+                logOut();
                 
                 //Créer un nouvel utilisateur
                 Utilisateur u = new Utilisateur(mdp);
@@ -94,6 +90,14 @@ public class AccueilController {
                 
                 user.create(u);
             }
+        }
+    }
+    
+    public void logOut() {
+        //Vider la table utilisateur
+        List<Utilisateur> lu = user.findAll();
+        for(Utilisateur u : lu) {
+            user.remove(u);
         }
     }
     
