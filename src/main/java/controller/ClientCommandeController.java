@@ -23,9 +23,9 @@ public class ClientCommandeController {
 	@Inject
 	Models models; // Pour transmettre les infos à la vue
 	@GET
-	public void afficheCommandesPourLeClient( @QueryParam("code") String codeClient ) {
+	public void afficheCommandesPourLeClient() {
 		// On utilise le DAO pour trouver le client qui correspond au paramètre
-		Client c = facade.find(codeClient); // TODO : gérer les erreurs : et si le client n'existe pas ?
+		Client c = facade.find("VINET"); // TODO : gérer les erreurs : et si le client n'existe pas ?
 		// On transmet les informations à la vue
 		models.put("client", c);
 	}
