@@ -17,7 +17,7 @@ import javax.validation.executable.ValidateOnExecution;
 import javax.ws.rs.FormParam;
 
 @Controller
-@Path("editClient")
+@Path("iencli")
 @View("editClient.jsp")
 //@TransactionManagement(TransactionManagementType.BEAN)
 public class EditClientController {
@@ -36,13 +36,12 @@ public class EditClientController {
 
     @GET
     public void show() {
-        models.put("clients", dao.find("BOTTM"));
+        models.put("clients", dao.find("ALFKI"));
     }
 
     @POST
     @ValidateOnExecution(type = ExecutableType.ALL)
     public String modifier(
-            @FormParam("codeClient") String codeClient,
             @FormParam("societe") String societe,
             @FormParam("contact") String contact,
             @FormParam("fonction") String fonction,
@@ -54,7 +53,7 @@ public class EditClientController {
             @FormParam("telephone") String telephone,
             @FormParam("fax") String fax
     ) {
-        Client client = dao.find("BOTTM");
+        Client client = dao.find("ALFKI");
         if (adresse != null) {
             client.setAdresse(adresse);
         }
@@ -97,10 +96,6 @@ public class EditClientController {
 
         
         
-        
-        em.getTransaction().begin();
-        em.merge(client);
-        em.getTransaction().commit();
 
         return "redirect:/editClient";
     }
