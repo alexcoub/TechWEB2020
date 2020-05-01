@@ -98,7 +98,7 @@ INSERT INTO Client VALUES ( 'WELLI', 'Wellington Importadora', 'Paula Parente', 
 INSERT INTO Client VALUES ( 'WHITC', 'White Clover Markets', 'Karl Jablonski', 'Propriétaire', '305 - 14th Ave. S.Suite 3B', 'Seattle', 'WA', '98128', 'États-Unis', '(206) 555-4112', '(206) 555-4115')
 INSERT INTO Client VALUES ( 'WILMK', 'Wilman Kala', 'Matti Karttunen', 'Assistant du marketing', 'Keskuskatu 45', 'Helsinki', NULL, '21240', 'Finlande', '90-224 8858', '90-224 8858')
 INSERT INTO Client VALUES ( 'WOLZA', 'Wolski  Zajazd', 'Zbyszek Piestrzeniewicz', 'Propriétaire', 'ul. Filtrowa 68', 'Warszawa', NULL, '01-012', 'Pologne', '(26) 642-7012', '(26) 642-7012')
-
+INSERT INTO Client VALUES ( 'ADMIN', 'Administration', 'Administrateur', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
 
 
 INSERT INTO Commande VALUES ( 10248, 'VINET', '1994-08-04', '1994-08-16', 161.00, 'Vins et alcools Chevalier', '59 rue de l''Abbaye', 'Reims', NULL, '51100', 'France', 0.00)

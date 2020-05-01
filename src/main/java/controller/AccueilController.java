@@ -9,8 +9,6 @@ import comptoirs.model.dao.ClientFacade;
 import comptoirs.model.dao.UtilisateurFacade;
 import comptoirs.model.entity.Client;
 import comptoirs.model.entity.Utilisateur;
-import java.sql.Connection;
-import java.sql.Statement;
 import java.util.List;
 import javax.inject.Inject;
 import javax.mvc.Controller;
@@ -19,7 +17,6 @@ import javax.mvc.View;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
-
 /**
  *
  * @author ulyss
@@ -38,17 +35,11 @@ public class AccueilController {
     
     @Inject
     Models models;
-    
-    static Connection cnx;
-    static Statement st;
-    
+
     @GET
-    public void show(@QueryParam("id") String identifiant,
+    public String show(@QueryParam("id") String identifiant,
             @QueryParam("pw") String motDePasse) {
-       
-        //Envoyer le contact à la vue
-        models.put("contact", identifiant);
-        
+
         //Récupérer les champs entrés par l'utilisateur
         String loginParam = identifiant;
         String mdpParam = motDePasse;
@@ -75,6 +66,9 @@ public class AccueilController {
                 //Supprimer l'utilisateur actuel (déconnexion)
                 logOut();
                 
+                //Envoyer le contact à la vue
+                models.put("contact", identifiant);
+
                 //Créer un nouvel utilisateur
                 Utilisateur u = new Utilisateur(mdp);
                 //Renseigner toutes les informations de l'utilisateur actuel
@@ -87,9 +81,22 @@ public class AccueilController {
                 u.setPays(pays);
                 u.setTelephone(telephone);
                 u.setFax(fax);
-                
+                //Ajouter l'utilisateur à la BDD
                 user.create(u);
+                 //Vérifier si c'est un client ou l'administrateur qui s'est connecté
+                if(login.equals("Administrateur")) {
+                    return "admin.jsp";
+                }
+                else{
+                    return "accueil.jsp";
+                }
             }
+            else {
+                return "redirect:/index.html";
+            }
+        }
+        else {
+            return "redirect:/index.html";
         }
     }
     
