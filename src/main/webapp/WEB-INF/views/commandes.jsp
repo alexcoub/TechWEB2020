@@ -24,8 +24,9 @@
 
             </c:forEach>
         </table>
-                    <form 
-        <input type="button" value="Créer nouveau bon"  >
+                    <form action="mvc/accueil" method="GET">
+                        <input type="submit" value="Créer nouveau bon"  >
+                    </form>
         <hr>
         <a href="${pageContext.request.contextPath}/">Retour au menu</a>
         <hr>
