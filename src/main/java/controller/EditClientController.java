@@ -19,7 +19,7 @@ import javax.validation.executable.ValidateOnExecution;
 import javax.ws.rs.FormParam;
 
 @Controller
-@Path("iencli")
+@Path("client")
 @View("editClient.jsp")
 //@TransactionManagement(TransactionManagementType.BEAN)
 public class EditClientController {
