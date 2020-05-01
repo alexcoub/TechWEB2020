@@ -26,19 +26,21 @@ public class EditClientController {
 
     @Inject
     ClientFacade dao;
-    
+
     @Inject
     UtilisateurFacade user;
 
     @Inject
     Models models;
 
+    String c = null;
+
     @GET
     public void show() {
-        String c = null;
+
         List<Utilisateur> lu = user.findAll();
-        for(Utilisateur u : lu) {
-           c = u.getCode();
+        for (Utilisateur u : lu) {
+            c = u.getCode();
         }
         models.put("clients", dao.find(c));
     }
@@ -57,7 +59,11 @@ public class EditClientController {
             @FormParam("telephone") String telephone,
             @FormParam("fax") String fax
     ) {
-        Client client = dao.find("BOTTM");
+        List<Utilisateur> lu = user.findAll();
+        for (Utilisateur u : lu) {
+            c = u.getCode();
+        }
+        Client client = dao.find(c);
 
         client.setAdresse(adresse);
         client.setCodePostal(codePostal);
@@ -71,7 +77,7 @@ public class EditClientController {
         client.setVille(ville);
 
         dao.edit(client);
-        models.put("clients", dao.find("BOTTM"));
+        models.put("clients", dao.find(c));
 
     }
 }
