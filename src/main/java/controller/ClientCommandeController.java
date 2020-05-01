@@ -1,6 +1,7 @@
 package controller;
 
 import comptoirs.model.dao.ClientFacade;
+import comptoirs.model.dao.UtilisateurFacade;
 
 
 import javax.inject.Inject;
@@ -12,6 +13,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 
 import comptoirs.model.entity.Client;
+import comptoirs.model.entity.Utilisateur;
+import java.util.List;
 
 
 @Controller
@@ -22,11 +25,20 @@ public class ClientCommandeController {
 	ClientFacade facade;
 	@Inject
 	Models models; // Pour transmettre les infos à la vue
+	@Inject
+	UtilisateurFacade user; // Pour transmettre les infos à la vue
+        
+        String c =null;
+        
 	@GET
 	public void afficheCommandesPourLeClient() {
+             List<Utilisateur> lu = user.findAll();
+        for (Utilisateur u : lu) {
+            c = u.getCode();
+        }
 		// On utilise le DAO pour trouver le client qui correspond au paramètre
-		Client c = facade.find("VINET"); // TODO : gérer les erreurs : et si le client n'existe pas ?
+		Client client = facade.find(c); // TODO : gérer les erreurs : et si le client n'existe pas ?
 		// On transmet les informations à la vue
-		models.put("client", c);
+		models.put("client", client);
 	}
 }
