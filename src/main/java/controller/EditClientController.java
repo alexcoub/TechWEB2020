@@ -1,6 +1,7 @@
 package controller;
 
 import comptoirs.model.dao.ClientFacade;
+import comptoirs.model.dao.UtilisateurFacade;
 import javax.inject.Inject;
 import javax.mvc.Models;
 import javax.mvc.Controller;
@@ -9,6 +10,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
 import comptoirs.model.entity.Client;
+import comptoirs.model.entity.Utilisateur;
+import java.util.List;
 import javax.mvc.View;
 import javax.mvc.binding.BindingResult;
 import javax.validation.executable.ExecutableType;
@@ -23,13 +26,21 @@ public class EditClientController {
 
     @Inject
     ClientFacade dao;
+    
+    @Inject
+    UtilisateurFacade user;
 
     @Inject
     Models models;
 
     @GET
     public void show() {
-        models.put("clients", dao.find("BOTTM"));
+        String c = null;
+        List<Utilisateur> lu = user.findAll();
+        for(Utilisateur u : lu) {
+           c = u.getCode();
+        }
+        models.put("clients", dao.find(c));
     }
 
     @POST
