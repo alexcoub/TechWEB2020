@@ -6,9 +6,7 @@
 package controller;
 
 import comptoirs.model.dao.ClientFacade;
-import comptoirs.model.dao.UtilisateurFacade;
 import comptoirs.model.entity.Client;
-import comptoirs.model.entity.Utilisateur;
 import java.util.List;
 import javax.inject.Inject;
 import javax.mvc.Controller;
@@ -30,14 +28,13 @@ public class AccueilController {
     @Inject
     ClientFacade client;
     
-    @Inject
-    UtilisateurFacade user;
     
     @Inject
     Models models;
 
     @GET
-    public String show(@QueryParam("id") String identifiant,
+    public String show(
+            @QueryParam("id") String identifiant,
             @QueryParam("pw") String motDePasse) {
 
         //Récupérer les champs entrés par l'utilisateur
@@ -69,20 +66,8 @@ public class AccueilController {
                 //Envoyer le contact à la vue
                 models.put("contact", identifiant);
 
-                //Créer un nouvel utilisateur
-                Utilisateur u = new Utilisateur(mdp);
                 //Renseigner toutes les informations de l'utilisateur actuel
-                u.setSociete(societe);
-                u.setContact(login);
-                u.setFonction(fonction);
-                u.setAdresse(adresse);
-                u.setVille(ville);
-                u.setCodePostal(codepostal);
-                u.setPays(pays);
-                u.setTelephone(telephone);
-                u.setFax(fax);
-                //Ajouter l'utilisateur à la BDD
-                user.create(u);
+               
                  //Vérifier si c'est un client ou l'administrateur qui s'est connecté
                 if(login.equals("Administrateur")) {
                     return "admin.jsp";
@@ -101,11 +86,7 @@ public class AccueilController {
     }
     
     public void logOut() {
-        //Vider la table utilisateur
-        List<Utilisateur> lu = user.findAll();
-        for(Utilisateur u : lu) {
-            user.remove(u);
-        }
+       
     }
     
 }

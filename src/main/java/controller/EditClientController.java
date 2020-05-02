@@ -1,7 +1,7 @@
 package controller;
 
+import Connexion.ClientConnecte;
 import comptoirs.model.dao.ClientFacade;
-import comptoirs.model.dao.UtilisateurFacade;
 import javax.inject.Inject;
 import javax.mvc.Models;
 import javax.mvc.Controller;
@@ -10,7 +10,6 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
 import comptoirs.model.entity.Client;
-import comptoirs.model.entity.Utilisateur;
 import java.util.List;
 import javax.mvc.View;
 import javax.mvc.binding.BindingResult;
@@ -23,26 +22,22 @@ import javax.ws.rs.FormParam;
 @View("editClient.jsp")
 //@TransactionManagement(TransactionManagementType.BEAN)
 public class EditClientController {
-
+    
+    @Inject
+    ClientConnecte user;
     @Inject
     ClientFacade dao;
 
-    @Inject
-    UtilisateurFacade user;
 
     @Inject
     Models models;
 
-    String c = null;
+    String c = "BOTTM";
 
     @GET
     public void show() {
 
-        List<Utilisateur> lu = user.findAll();
-        for (Utilisateur u : lu) {
-            c = u.getCode();
-        }
-        models.put("clients", dao.find(c));
+        models.put("clients", user.getClientC());
     }
 
     @POST
@@ -59,11 +54,8 @@ public class EditClientController {
             @FormParam("telephone") String telephone,
             @FormParam("fax") String fax
     ) {
-        List<Utilisateur> lu = user.findAll();
-        for (Utilisateur u : lu) {
-            c = u.getCode();
-        }
-        Client client = dao.find(c);
+       
+        Client client = user.getClientC();
 
         client.setAdresse(adresse);
         client.setCodePostal(codePostal);
@@ -77,7 +69,7 @@ public class EditClientController {
         client.setVille(ville);
 
         dao.edit(client);
-        models.put("clients", dao.find(c));
+        models.put("clients", user.getClientC());
 
     }
 }
