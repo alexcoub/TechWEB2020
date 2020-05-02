@@ -14,9 +14,9 @@
     </head>
     <body>
         <form method="POST">
-			<label>Votre pseudo : <input name="userName"></label>
-                        <label>Mot de passe : <input name="userMdp"></label>                        
-			<input value="Connexion" type="SUBMIT">
-		</form>
+            <label>Votre pseudo : <input name="userName" required></label>
+            <label>Mot de passe : <input name="userMdp" required></label>                        
+            <input value="Connexion" type="SUBMIT">
+        </form>
     </body>
 </html>

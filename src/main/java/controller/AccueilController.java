@@ -5,6 +5,7 @@
  */
 package controller;
 
+import Connexion.ClientConnecte;
 import comptoirs.model.dao.ClientFacade;
 import comptoirs.model.entity.Client;
 import java.util.List;
@@ -28,6 +29,8 @@ public class AccueilController {
     @Inject
     ClientFacade client;
     
+    @Inject
+    ClientConnecte user;
     
     @Inject
     Models models;
@@ -85,7 +88,10 @@ public class AccueilController {
         }
     }
     
-    public void logOut() {
+    public String logOut() {
+        user.logout();
+        return "redirect:/connexion";
+        
        
     }
     

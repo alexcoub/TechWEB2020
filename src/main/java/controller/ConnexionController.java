@@ -26,28 +26,31 @@ import javax.ws.rs.Path;
 @Path("connexion") // Le chemin d'accès au contrôleur
 @View("connexion.jsp") // La vue qui affiche le résultat
 public class ConnexionController {
+
     @Inject
     ClientFacade client;
-    
+
     @Inject
     ClientConnecte user;
-    
+
     @GET
-    public void show(){
+    public void show() {
         System.out.println("controller.ConnexionController.show()");
     }
-    
+
     @POST
     public String login(
             @FormParam("userName") String name,
             @FormParam("userMdp") String mdp
     ) {
-        Client u=client.find(mdp);
-        user.login(u);
-        return "redirect:/client";
-        
-        
+        Client u = client.find(mdp);
+        String redirect= "erreurCo.jsp";
+        if (name.equals(u.getContact())) {
+            user.login(u);
+            redirect= "redirect:/client";
+        }
+        return redirect;
+
     }
-            
-    
+
 }

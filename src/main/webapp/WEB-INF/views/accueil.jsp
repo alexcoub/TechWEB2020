@@ -14,7 +14,7 @@
     <body>
         <a href="${pageContext.request.contextPath}/">Se déconnecter</a>
         <br><br>
-        <a href="${pageContext.request.contextPath}/mvc/iencli">Modifier mes données personnelles</a>
+        <a href="${pageContext.request.contextPath}/mvc/client">Modifier mes données personnelles</a>
              
     </body>
 </html>

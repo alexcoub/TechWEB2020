@@ -65,7 +65,7 @@
                 </tr>
             </table>
             
-
+         <a href="${pageContext.request.contextPath}/mvc/commandes">Mes commandes</a>
 
 
     </body>
