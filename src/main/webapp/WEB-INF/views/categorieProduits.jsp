@@ -51,12 +51,14 @@
                             </label>
                         </td>
                     <c:if test="${produit.indisponible eq 0}">
-                        <td>
-                            <input type="button" value="+" onclick="">
+                        <%----%><td>
+                            <form method='POST'>
+                                <input type="number" name="quantite" min="0" max="${produit.unitesEnStock}" required>
+                                <input type="submit" value="valider" onclick="">
+                                <input name="reference" value="${mvc.encoders.html(produit.reference)}" hidden>
+                            </form>
                         </td>
-                        <td>
-                            <input type="button" value="-" >
-                        </td>
+                        
                     </c:if>
 
                 </tr>
