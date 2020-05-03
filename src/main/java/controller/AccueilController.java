@@ -13,9 +13,12 @@ import javax.inject.Inject;
 import javax.mvc.Controller;
 import javax.mvc.Models;
 import javax.mvc.View;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
+
 /**
  *
  * @author ulyss
@@ -24,21 +27,20 @@ import javax.ws.rs.QueryParam;
 @Path("accueil")
 @View("accueil.jsp")
 public class AccueilController {
-    
+
     //DAO
     @Inject
     ClientFacade client;
-    
+
     @Inject
     ClientConnecte user;
-    
+
     @Inject
     Models models;
 
-    @GET
-    public String show(
-            @QueryParam("id") String identifiant,
-            @QueryParam("pw") String motDePasse) {
+    /*public String show(
+            @QueryParam("userName") String identifiant,
+            @QueryParam("userMdp") String motDePasse) {
 
         //Récupérer les champs entrés par l'utilisateur
         String loginParam = identifiant;
@@ -48,23 +50,12 @@ public class AccueilController {
         if(!loginParam.equals("") && !mdpParam.equals("")){
             //Trouver les informations de l'utilisateur dans la table Client
             Client c = client.find(mdpParam);
-
-            //Enregistrer ses informations dans des variables locales
-            String mdp = c.getCode();
-            String societe = c.getSociete();
-            String login = c.getContact();
-            String fonction = c.getFonction();
-            String adresse = c.getAdresse();
-            String ville = c.getVille();
-            String codepostal = c.getCodePostal();
-            String pays = c.getPays();
-            String telephone = c.getTelephone();
-            String fax = c.getFax();
+          
             
             //Vérifier que la combinaiason login/mdp correspond à la combinaison contact/code
-            if(login.equals(loginParam) && mdp.equals(mdpParam)) { 
+            if(identifiant.equals(loginParam) && motDePasse.equals(mdpParam)) { 
                 //Supprimer l'utilisateur actuel (déconnexion)
-                logOut();
+                user.login(c);
                 
                 //Envoyer le contact à la vue
                 models.put("contact", identifiant);
@@ -86,13 +77,27 @@ public class AccueilController {
         else {
             return "redirect:/index.html";
         }
+    }*/
+    @GET
+    public String login(
+            @QueryParam("userName") String name,
+            @QueryParam("userMdp") String mdp
+    ) {
+        Client u = client.find(mdp);
+        String redirect = "erreurCo.jsp";
+        if (name.equals(u.getContact())) {
+            user.login(u);
+            redirect = "redirect:/client";
+        }
+        return redirect;
     }
     
-    public String logOut() {
+    
+
+   /* public String logOut() {
         user.logout();
         return "redirect:/connexion";
-        
-       
-    }
-    
+
+    }*/
+
 }

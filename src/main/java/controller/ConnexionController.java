@@ -24,7 +24,7 @@ import javax.ws.rs.Path;
  */
 @Controller
 @Path("connexion") // Le chemin d'accès au contrôleur
-@View("connexion.jsp") // La vue qui affiche le résultat
+@View("index.html") // La vue qui affiche le résultat
 public class ConnexionController {
 
     @Inject

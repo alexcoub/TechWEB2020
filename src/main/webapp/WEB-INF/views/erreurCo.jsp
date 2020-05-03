@@ -14,6 +14,6 @@
     <body>
         <h1>ERREUR !!!</h1>
         <h2>Pseudo ou mot de passe incorrects !</h2>
-         <a href="${pageContext.request.contextPath}/mvc/connexion">S'identifier</a>
+         <a href="${pageContext.request.contextPath}/">S'identifier</a>
     </body>
 </html>
