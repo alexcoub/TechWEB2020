@@ -6,7 +6,9 @@
 package controller;
 
 import Connexion.ClientConnecte;
+import Connexion.Panier;
 import comptoirs.model.dao.ClientFacade;
+import comptoirs.model.dao.CommandeFacade;
 import comptoirs.model.entity.Client;
 import javax.inject.Inject;
 import javax.mvc.Controller;
@@ -29,9 +31,17 @@ public class ConnexionController {
 
     @Inject
     ClientFacade client;
+    
+    @Inject
+    Panier panier;
 
     @Inject
     ClientConnecte user;
+    
+    @Inject
+    CommandeFacade commandeFacade; 
+    
+    
 
     @GET
     public void show() {
@@ -43,7 +53,10 @@ public class ConnexionController {
             @FormParam("userName") String name,
             @FormParam("userMdp") String mdp
     ) {
+       
         Client u = client.find(mdp);
+        
+        
         String redirect= "erreurCo.jsp";
         if (name.equals(u.getContact())) {
             user.login(u);

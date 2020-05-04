@@ -5,9 +5,12 @@
  */
 package Connexion;
 
+
 import comptoirs.model.entity.Client;
 import java.io.Serializable;
+
 import javax.enterprise.context.SessionScoped;
+
 import javax.inject.Named;
 
 /**
@@ -17,7 +20,21 @@ import javax.inject.Named;
 @SessionScoped
 @Named("clientConnecte")
 public class ClientConnecte extends Client implements Serializable {
+
     private Client clientC;
+    private Panier panier;
+
+    public Panier getPanier() {
+        return panier;
+    }
+
+    public void setPanier(Panier panier) {
+        this.panier = panier;
+    }
+
+
+   
+
     
 
     public Client getClientC() {
@@ -27,12 +44,18 @@ public class ClientConnecte extends Client implements Serializable {
     public void setClientC(Client clientC) {
         this.clientC = clientC;
     }
-    
-    public void login(Client c){
+
+    public void login(Client c) {
         setClientC(c);
+
     }
-    public void logout(){
+
+    public void logout() {
         setClientC(null);
     }
-    
+
+    public void viderPanier() {
+        setPanier(null);
+    }
+
 }

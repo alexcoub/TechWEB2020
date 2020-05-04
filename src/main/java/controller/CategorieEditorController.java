@@ -1,6 +1,7 @@
 package controller;
 
 import comptoirs.model.dao.CategorieFacade;
+import comptoirs.model.dao.ProduitFacade;
 import javax.inject.Inject;
 import javax.mvc.Models;
 import javax.mvc.Controller;
@@ -10,6 +11,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
 import comptoirs.model.entity.Categorie;
+import comptoirs.model.entity.Produit;
 import form.CategorieForm;
 
 import java.util.logging.Level;
@@ -28,6 +30,9 @@ import javax.validation.executable.ValidateOnExecution;
 public class CategorieEditorController {
 	@Inject
 	CategorieFacade dao;
+        
+        @Inject
+	ProduitFacade produits;
 
 	@Inject
 	BindingResult formValidationErrors;

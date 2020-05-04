@@ -55,7 +55,7 @@
                             <form method='POST'>
                                 <input type="number" name="quantite" min="0" max="${produit.unitesEnStock}" required>
                                 <input type="submit" value="valider" onclick="">
-                                <input name="reference" value="${mvc.encoders.html(produit.reference)}" hidden>
+                                <input name="reference" type="number" value="${mvc.encoders.html(produit.reference)}">
                             </form>
                         </td>
                         

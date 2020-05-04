@@ -1,6 +1,8 @@
 package controller;
 
+import Connexion.ClientConnecte;
 import Connexion.Panier;
+import Connexion.ProduitPanier;
 import comptoirs.model.dao.CategorieFacade;
 import comptoirs.model.dao.LigneFacade;
 import comptoirs.model.dao.ProduitFacade;
@@ -15,6 +17,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 
 import comptoirs.model.entity.Categorie;
+import comptoirs.model.entity.Ligne;
+import comptoirs.model.entity.LignePK;
+import comptoirs.model.entity.Produit;
+import java.util.ArrayList;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 
@@ -26,11 +32,9 @@ public class CategorieProduitController {
     @Inject
     CategorieFacade facade;
     @Inject
-    LigneFacade ligne;
-    @Inject
     Models models;
     @Inject
-    Panier panier;
+    ClientConnecte user;
     @Inject
     ProduitFacade produits;
 
@@ -53,16 +57,23 @@ public class CategorieProduitController {
         // On transmet les informations à la vue
         models.put("categories", touteslesCategories);
         models.put("selected", categorieChoisie);
-    }
 
+    }
+    ArrayList<ProduitPanier> o = new ArrayList<ProduitPanier>();
+    Panier p = new Panier();
     @POST
     public String ajouterProduit(
             @FormParam("quantite") short quantite,
             @FormParam("reference") int reference
     ) {
-        panier.ajouterLigne(produits.find(reference), quantite);
-        
-        return "redirect:/client";
+        ProduitPanier e = new ProduitPanier(reference, quantite);
+
+        o.add(e);
+        p.setListeProd(o);
+        user.setPanier(p);
+
+        return "redirect:/validationPanier";
 
     }
+
 }

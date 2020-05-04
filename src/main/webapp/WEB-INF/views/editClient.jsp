@@ -66,7 +66,9 @@
             </table>
             
          <a href="${pageContext.request.contextPath}/mvc/commandes">Mes commandes</a>
-          <a href="${pageContext.request.contextPath}/mvc/categorieProduits">Mes commandes</a>
+         <a href="${pageContext.request.contextPath}/mvc/categorieProduits">Mes commandes</a><br>
+         
+           <a href="${pageContext.request.contextPath}/mvc/validationPanier">panier</a>
 
 
     </body>
