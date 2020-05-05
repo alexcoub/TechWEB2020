@@ -36,7 +36,7 @@
 
                 <tr>
                     
-                    <td>${mvc.encoders.html(user.mesProduits)}</td>
+                    <td>${mvc.encoders.html(user.panier)}</td>
                     <td>${mvc.encoders.html(user.code)}</td>
                     
                 </tr>
