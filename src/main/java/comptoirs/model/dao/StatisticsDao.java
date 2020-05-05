@@ -19,6 +19,24 @@ public class StatisticsDao {
 		+ "JOIN p.ligneCollection li "
 		+ "GROUP BY cat.libelle";
 
+	private static final String CA_CATEGORIE_DTO
+		= "SELECT new comptoires.model.dto.StatsResult "
+                + "(cat.libelle, SUM(p.prixUnitaire*li.quantite))"
+		+ "FROM Categorie cat "
+		+ "JOIN cat.produitCollection p "
+		+ "JOIN p.ligneCollection li "
+		+ "GROUP BY cat.libelle";
+
+	private static final String CA_CATEGORIE_DTO_DATE
+		= "SELECT new comptoires.model.dto.StatsResult "
+                + "(cat.libelle, SUM(p.prixUnitaire*li.quantite))"
+		+ "FROM Categorie cat "
+		+ "JOIN cat.produitCollection p "
+		+ "JOIN p.ligneCollection li "
+                + "JOIN li.commande1 c"
+                + "WHERE c.saisieLe between :minDate and :maxDate"
+		+ "GROUP BY cat.libelle";
+        
 	private static final String UNIT_SOLDS_DTO
 		= "SELECT new comptoirs.model.dto.StatsResult"
 		+ "(cat.libelle, SUM(li.quantite)) "
@@ -35,7 +53,45 @@ public class StatisticsDao {
 		+ "JOIN p.ligneCollection li "
 		+ "WHERE cat.code = :code "
 		+ "GROUP BY p.nom ";
+        
+	private static final String CA_PAYS_DTO
+		= "SELECT new comptoires.model.dto.StatsResult "
+                + "(c.paysLivraison,SUM(p.prixUnitaire*li.quantite)))"
+		+ "FROM Commande c"
+		+ "JOIN c.ligneCollection li "
+		+ "JOIN li.produit1 p "
+		+ "GROUP BY c.paysLivraison";
 
+	private static final String CA_PAYS_DTO_DATE
+		= "SELECT new comptoires.model.dto.StatsResult "
+                + "(c.paysLivraison,SUM(p.prixUnitaire*li.quantite)))"
+		+ "FROM Commande c"
+		+ "JOIN c.ligneCollection li "
+		+ "JOIN li.produit1 p "
+                + "WHERE c.saisieLe between :minDate and :maxDate"
+		+ "GROUP BY c.paysLivraison";
+        
+	private static final String CA_CLIENT_DTO
+		= "SELECT new comptoires.model.dto.StatsResult "
+                + "(cl.contact,SUM(p.prixUnitaire*li.quantite)))"
+		+ "FROM Client cl"
+		+ "JOIN cl.commandeCollection c "
+		+ "JOIN c.ligneCollection li"
+                + "JOIN li.produit1 p"
+		+ "GROUP BY cl.contact";
+
+	private static final String CA_CLIENT_DTO_DATE
+		= "SELECT new comptoires.model.dto.StatsResult "
+                + "(cl.contact,SUM(p.prixUnitaire*li.quantite)))"
+		+ "FROM Client cl"
+		+ "JOIN cl.commandeCollection c "
+		+ "JOIN c.ligneCollection li"
+                + "JOIN li.produit1 p"
+                + "WHERE c.saisieLe between :minDate and :maxDate"
+		+ "GROUP BY cl.contact";
+
+                
+        
 	@PersistenceContext(unitName = "comptoirs")
 	private EntityManager em;
 
@@ -44,6 +100,12 @@ public class StatisticsDao {
 		List results = query.getResultList();
 		return results;
 	}
+        
+        public List<StatsResult> chiffreAffaireCategorieDTO() {
+                Query query = em.createQuery(CA_CATEGORIE_DTO, StatsResult.class);
+                List<StatsResult> results = query.getResultList();
+                return results;
+        }
 
 	public List<StatsResult> unitesVenduesParCategorieDTO() {
 		Query query = em.createQuery(UNIT_SOLDS_DTO, StatsResult.class);
@@ -56,6 +118,18 @@ public class StatisticsDao {
 		List<StatsResult> results = query.setParameter("code", codeCategorie).getResultList();
 		return results;
 	}
+        
+        public List<StatsResult> chiffreAffaireParPaysDTO() {
+                Query query = em.createQuery(CA_PAYS_DTO, StatsResult.class);
+                List<StatsResult> results = query.getResultList();
+                return results;
+        }
+        
+        public List<StatsResult> chiffreAffaireClientDTO() {
+                Query query = em.createQuery(CA_CLIENT_DTO, StatsResult.class);
+                List<StatsResult> results = query.getResultList();
+                return results;
+        }
 
 	public HtmlSqlDate datePlusRecenteCommande() {
 		Date result = em.createQuery("select max(c.saisieLe) from Commande c", Date.class)
@@ -68,6 +142,25 @@ public class StatisticsDao {
 			.getSingleResult();
 		return new HtmlSqlDate(result);
 	}
+        
+        public List<StatsResult> chiffreAffairePaysDTO_DATE(Date minDate,Date maxDate) {
+               return em.createQuery(CA_PAYS_DTO_DATE,StatsResult.class)
+                       .setParameter("minDate",minDate)
+                       .setParameter("maxDate", maxDate)
+                       .getResultList();
+        }
+        public List<StatsResult> chiffreAffaireClientDTO_DATE(Date minDate,Date maxDate) {
+               return em.createQuery(CA_CLIENT_DTO_DATE,StatsResult.class)
+                       .setParameter("minDate",minDate)
+                       .setParameter("maxDate", maxDate)
+                       .getResultList();
+        }
+        public List<StatsResult> chiffreCategorieDTO_DATE(Date minDate,Date maxDate) {
+               return em.createQuery(CA_CATEGORIE_DTO_DATE,StatsResult.class)
+                       .setParameter("minDate",minDate)
+                       .setParameter("maxDate", maxDate)
+                       .getResultList();
+        }
 
 	public List<Integer> commandesEntre(Date minDate, Date maxDate) {
 		return em.createQuery("select c.numero from Commande c where c.saisieLe between :minDate and :maxDate", Integer.class)
