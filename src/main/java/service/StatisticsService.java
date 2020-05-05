@@ -33,6 +33,53 @@ public class StatisticsService {
 		return dao.produitsVendusPour(codeCategorie);
 	}
 
+        @Path("ChiffreaffaireDate")
+        @Produces(MediaType.APPLICATION_JSON)
+        public List<StatsResult> chiffreAffaireCategorieDate(
+            @QueryParam("minDate") HtmlSqlDate minDate,
+            @QueryParam("maxDate") HtmlSqlDate maxDate){
+            return dao.chiffreAffaireClientDTO_DATE(minDate, maxDate);
+        }
+        
+        @GET
+        @Path("chiffreaffairepays")
+        @Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+        public List<StatsResult> chiffreAffaireParPays(){
+            return dao.chiffreAffaireParPaysDTO();
+        }
+
+        @GET
+        @Path("chiffreaffairepaysDate")
+        @Produces(MediaType.APPLICATION_JSON)
+        public List<StatsResult> chiffreAffairePaysDate(
+            @QueryParam("minDate") HtmlSqlDate minDate,
+            @QueryParam("maxDate") HtmlSqlDate maxDate){
+            return dao.chiffreAffairePaysDTO_DATE(minDate, maxDate);
+        }
+        
+        @GET
+        @Path("chiffreaffaireclient")
+        @Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+        public List<StatsResult> chiffreAffaireClient(){
+            return dao.chiffreAffaireClientDTO();
+        }
+        
+        @GET
+        @Path("chiffreaffaireclientDate")
+        @Produces(MediaType.APPLICATION_JSON)
+        public List<StatsResult> chiffreAffaireClientDate(
+            @QueryParam("minDate") HtmlSqlDate minDate,
+            @QueryParam("maxDate") HtmlSqlDate maxDate){
+            return dao.chiffreAffaireClientDTO_DATE(minDate, maxDate);
+        }
+        
+        @GET
+        @Path("produits")
+        @Produces(MediaType.APPLICATION_JSON)
+        public List<StatsResult> produitVendus(@QueryParam("test") Integer codeCategorie){
+            return dao.produitsVendusPour(codeCategorie);
+        }
+                
 	@GET
 	@Path("commandesFiltrees")
 	@Produces(MediaType.APPLICATION_JSON)

@@ -90,8 +90,6 @@ public class StatisticsDao {
                 + "WHERE c.saisieLe between :minDate and :maxDate"
 		+ "GROUP BY cl.contact";
 
-                
-        
 	@PersistenceContext(unitName = "comptoirs")
 	private EntityManager em;
 
