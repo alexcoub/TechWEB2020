@@ -22,7 +22,7 @@ import javax.inject.Named;
 public class ClientConnecte extends Client implements Serializable {
 
     private Client clientC;
-    private Panier panier;
+    private Panier panier=new Panier();
 
     public Panier getPanier() {
         return panier;
@@ -55,7 +55,7 @@ public class ClientConnecte extends Client implements Serializable {
     }
 
     public void viderPanier() {
-        setPanier(null);
+        panier.getListeProd().clear();
     }
 
 }

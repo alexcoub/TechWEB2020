@@ -10,6 +10,7 @@ import Connexion.Panier;
 import Connexion.ProduitPanier;
 import comptoirs.model.dao.CommandeFacade;
 import comptoirs.model.dao.LigneFacade;
+import comptoirs.model.dao.ProduitFacade;
 import comptoirs.model.entity.Commande;
 import comptoirs.model.entity.Ligne;
 import comptoirs.model.entity.LignePK;
@@ -46,14 +47,16 @@ public class validationPanierController {
     CommandeFacade commandes;
     @Inject
     LigneFacade lignes;
+    @Inject 
+    ProduitFacade produits;
 
     @GET
     public void show() {
         models.put("user", user);
     }
-
+Commande comValide = new Commande();
     @POST
-    public void valider(
+    public String valider(
             @FormParam("port") BigDecimal port,
             @FormParam("adresse") String adresse,
             @FormParam("ville") String ville,
@@ -63,7 +66,6 @@ public class validationPanierController {
             @FormParam("codeReduc") BigDecimal codeReduc,
             @FormParam("destinataire") String destinataire) {
         //Creer la nouvelle commande validée
-        Commande comValide = new Commande();
         
         comValide.setSaisieLe(new Date());
 
@@ -81,11 +83,15 @@ public class validationPanierController {
         commandes.create(comValide);
         //Insère les lignes de la commande dans la bdd
         for(ProduitPanier liste:user.getPanier().getListeProd()){
-            LignePK lignepk=new LignePK(comValide.getNumero(), liste.getProduitSelectionne());
+            int ref= produits.find(liste.getProduitSelectionne().getReference()).getReference();
+            LignePK lignepk=new LignePK(comValide.getNumero(),ref);
             Ligne ligne=new Ligne(lignepk, liste.getQte());
             lignes.create(ligne);
         }
+        commandes.edit(comValide);
         user.viderPanier();
+        models.put("user",user);
+        return "redirect:/commandes";
 
     }
 

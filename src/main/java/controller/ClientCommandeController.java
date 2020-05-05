@@ -27,7 +27,6 @@ public class ClientCommandeController {
         @Inject
         ClientConnecte user;
 	        
-        String c ="BOTTM";
         
 	@GET
 	public void afficheCommandesPourLeClient() {
@@ -35,6 +34,9 @@ public class ClientCommandeController {
 		// On utilise le DAO pour trouver le client qui correspond au paramètre
                 // TODO : gérer les erreurs : et si le client n'existe pas ?
 		// On transmet les informations à la vue
+                Client t=user.getClientC();
+                
+                user.setClientC(t);
 		models.put("client", user.getClientC());
 	}
 }

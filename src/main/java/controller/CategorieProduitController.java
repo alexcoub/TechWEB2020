@@ -60,19 +60,15 @@ public class CategorieProduitController {
 
     }
     ArrayList<ProduitPanier> o = new ArrayList<ProduitPanier>();
-    Panier p = new Panier();
     @POST
-    public String ajouterProduit(
+    public void ajouterProduit(
             @FormParam("quantite") short quantite,
             @FormParam("reference") int reference
     ) {
-        ProduitPanier e = new ProduitPanier(reference, quantite);
-
-        o.add(e);
-        p.setListeProd(o);
-        user.setPanier(p);
-
-        return "redirect:/validationPanier";
+        ProduitPanier e = new ProduitPanier(produits.find(reference), quantite);
+        o.add(e);  
+        user.getPanier().getListeProd().addAll(o);
+        
 
     }
 

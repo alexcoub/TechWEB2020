@@ -24,7 +24,7 @@
 
             </c:forEach>
         </table>
-                    <form action="mvc/accueil" method="GET">
+                    <form action="categorieProduits" method="GET">
                         <input type="submit" value="Créer nouveau bon"  >
                     </form>
         <hr>

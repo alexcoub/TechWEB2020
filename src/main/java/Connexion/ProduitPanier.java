@@ -5,20 +5,22 @@
  */
 package Connexion;
 
+import comptoirs.model.entity.Produit;
+
 
 /**
  *
  * @author Alex
  */
 public class ProduitPanier {
-    int produitSelectionne;
+    Produit produitSelectionne;
     short qte;
 
-    public int getProduitSelectionne() {
+    public Produit getProduitSelectionne() {
         return produitSelectionne;
     }
 
-    public void setProduitSelectionne(int produitSelectionne) {
+    public void setProduitSelectionne(Produit produitSelectionne) {
         this.produitSelectionne = produitSelectionne;
     }
 
@@ -30,7 +32,7 @@ public class ProduitPanier {
         this.qte = qte;
     }
 
-    public ProduitPanier(int produitSelectionne, short qte) {
+    public ProduitPanier(Produit produitSelectionne, short qte) {
         this.produitSelectionne = produitSelectionne;
         this.qte = qte;
     }

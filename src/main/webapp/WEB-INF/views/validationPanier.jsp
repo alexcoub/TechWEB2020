@@ -15,7 +15,7 @@
     <body>
         <h1>Mon panier duoo</h1>
         <form method='POST'> 	<%-- L'action par défaut est de revenir à l'URL du contrôleur --%>
-   
+
 
             Adresse : <input type="text" name="adresse" ><br>
             Ville : <input type="text" name="ville"><br>
@@ -26,21 +26,26 @@
             Port : <input name="port" type="text"><br>           
             Destinataire : <input name="destinataire" type="text"><br>
             code : <input name="codeReduc" type="text" value="0" ><br>
-            
+
             <input type="submit" value="Validation">
         </form>
         
-        <table border='1'>
-                <tr><th>Produits</th><th>User</th></tr>
-                        <%-- Pour chaque categorie, une ligne dans la table HTML --%>
 
+        <table border='1'>
+            <tr><th>Produits</th><th>Catégorie</th><th>Qte</th></tr>
+                    <%-- Pour chaque categorie, une ligne dans la table HTML --%>
+
+            <tr>
+                <c:forEach var="produit" items="${user.panier.listeProd}">
                 <tr>
-                    
-                    <td>${mvc.encoders.html(user.panier)}</td>
-                    <td>${mvc.encoders.html(user.code)}</td>
+                    <td>${produit.produitSelectionne.nom}</td>
+                    <td>${produit.produitSelectionne.categorie.libelle}</td>
+                    <td>${produit.qte}</td>
                     
                 </tr>
-            
-            </table>
+            </c:forEach>
+           
+
+        </table> <a href="${pageContext.request.contextPath}/mvc/editPanier">panier</a>
     </body>
 </html>

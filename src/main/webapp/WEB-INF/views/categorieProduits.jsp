@@ -51,11 +51,11 @@
                             </label>
                         </td>
                     <c:if test="${produit.indisponible eq 0}">
-                        <%----%><td>
+                        <td>
                             <form method='POST'>
                                 <input type="number" name="quantite" min="0" max="${produit.unitesEnStock}" required>
                                 <input type="submit" value="valider" onclick="">
-                                <input name="reference" type="number" value="${mvc.encoders.html(produit.reference)}">
+                                <input name="reference" type="number" value="${mvc.encoders.html(produit.reference)}" hidden>
                             </form>
                         </td>
                         
@@ -70,5 +70,7 @@
         <ul>
             <li><a href="https://bitbucket.org/rbastide/comptoirs_mvc/src/test/src/main/java/controller/CategorieProduitController.java" target="_blank">Le contrôleur</a></li>
             <li><a href="https://bitbucket.org/rbastide/comptoirs_mvc/src/test/src/main/webapp/WEB-INF/views/categorieProduits.jsp"  target="_blank">La vue</a></li>
-        </ul>		
+        </ul>	
+        <a href="${pageContext.request.contextPath}/mvc/validationPanier">valideer panier</a>
+         <a href="${pageContext.request.contextPath}/mvc/editPanier">Modifier panier</a>
 </html>

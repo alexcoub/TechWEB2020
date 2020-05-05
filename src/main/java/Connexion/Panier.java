@@ -37,6 +37,7 @@ public class Panier{
     }
 
     public Panier() {
+        listeProd=new ArrayList<ProduitPanier>();
     }
 
     
