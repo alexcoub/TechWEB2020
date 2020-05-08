@@ -1,6 +1,7 @@
 package controller;
 
 import comptoirs.model.dao.CategorieFacade;
+import comptoirs.model.dao.StatisticsDao;
 import comptoirs.model.entity.Categorie;
 import java.util.Date;
 import java.util.List;
@@ -18,7 +19,7 @@ import javax.ws.rs.Path;
 @View("statsProduitsPourCategorie.jsp")
 public class StatsController {
 	@Inject 
-	CategorieFacade dao;
+	StatisticsDao dao;
 
 	@Inject
 	Models models;
