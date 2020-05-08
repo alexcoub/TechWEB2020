@@ -14,6 +14,9 @@
     <body>
         <h1>Administrateur</h1>
         <br><br>
+        <a href="${pageContext.request.contextPath}/mvc/CAClient">CAClient</a>
+        <a href="${pageContext.request.contextPath}/mvc/CAPays">CAPays</a>
+        <a href="${pageContext.request.contextPath}/mvc/CACategorie">CACategorie</a>
         <a href="${pageContext.request.contextPath}/">Se déconnecter</a>
     </body>
 </html>
