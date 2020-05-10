@@ -10,8 +10,9 @@
     </head>
 
     <body>
-        <h3>Choisissez la catégorie à afficher</h3>
-        <a href="${pageContext.request.contextPath}/">Se déconnecter</a>
+        <h3>Choisissez la catégorie à afficher</h3><br>
+        <a href="${pageContext.request.contextPath}/mvc/client">Modifier mes informations</a>
+
         <br><br>
         <form> 	<%-- L'action par défaut est de revenir à l'URL du contrôleur --%>
             <%-- Une liste de choix pour le paramètre 'code' --%>

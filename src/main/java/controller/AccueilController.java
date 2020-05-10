@@ -83,11 +83,12 @@ public class AccueilController {
             @QueryParam("userName") String name,
             @QueryParam("userMdp") String mdp
     ) {
+        
         Client u = client.find(mdp);
         String redirect = "erreurCo.jsp";
         if (name.equals(u.getContact())) {
             user.login(u);
-            redirect = "redirect:/client";
+            redirect = "accueil.jsp";
         }
         return redirect;
     }

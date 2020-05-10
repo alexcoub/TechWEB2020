@@ -54,6 +54,9 @@
         <br>
         <br>
         <a href="${pageContext.request.contextPath}/mvc/categorieProduits">Continuer ma commande</a>
+        <br>
+        <br>
+        <a href="${pageContext.request.contextPath}/mvc/client">Modifier mes informations</a>
 
     </body>
 </html>

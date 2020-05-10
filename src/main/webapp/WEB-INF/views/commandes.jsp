@@ -24,8 +24,10 @@
                         <input type="submit" value="Créer nouveau bon"  >
                     </form>
         <hr>
-        <a href="${pageContext.request.contextPath}/">Retour au menu</a>
-        <hr>
+        <br>
+        <a href="${pageContext.request.contextPath}/mvc/client">Modifier mes informations</a>
+       <br>
+       <hr>
         
     </body>
 
