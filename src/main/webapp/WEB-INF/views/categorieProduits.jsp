@@ -53,7 +53,7 @@
                     <c:if test="${produit.indisponible eq 0}">
                         <td>
                             <form method='POST'>
-                                <input type="number" name="quantite" min="0" max="${produit.unitesEnStock}" required>
+                                <input type="number" name="quantite" min="1" max="${produit.unitesEnStock}" required>
                                 <input type="submit" value="valider" onclick="">
                                 <input name="reference" type="number" value="${mvc.encoders.html(produit.reference)}" hidden>
                             </form>
