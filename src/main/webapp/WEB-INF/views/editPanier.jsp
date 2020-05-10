@@ -16,11 +16,11 @@
         <h1>Revoire mon Panier</h1>
 
         <table border='1'>
-            <tr><th>Produits</th><th>Catégorie</th><th>Qte</th></tr>
+            <tr><th>Produits</th><th>Catégorie</th><th>Quantité</th></tr>
                     <%-- Pour chaque categorie, une ligne dans la table HTML --%>
 
             <tr>
-            <c:forEach var="produit" items="${user.panier.listeProd}">
+                <c:forEach var="produit" items="${user.panier.listeProd}">
                 <tr>
                     <td>${produit.produitSelectionne.nom}</td>
                     <td>${produit.produitSelectionne.categorie.libelle}</td>
@@ -34,8 +34,11 @@
                     </td>
                 </tr>
             </c:forEach>
-            <a href="${pageContext.request.contextPath}/mvc/validationPanier">panier</a>
 
         </table>
+        <a href="${pageContext.request.contextPath}/mvc/validationPanier">Valider mon Panier</a>
+        <br>
+        <a href="${pageContext.request.contextPath}/mvc/categorieProduits">Continuer ma commande</a>
+
     </body>
 </html>

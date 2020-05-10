@@ -21,6 +21,7 @@ import comptoirs.model.entity.Ligne;
 import comptoirs.model.entity.LignePK;
 import comptoirs.model.entity.Produit;
 import java.util.ArrayList;
+import java.util.TreeSet;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 
@@ -57,18 +58,35 @@ public class CategorieProduitController {
         // On transmet les informations à la vue
         models.put("categories", touteslesCategories);
         models.put("selected", categorieChoisie);
+        models.put("user", user);
 
     }
+    
+    
     ArrayList<ProduitPanier> o = new ArrayList<ProduitPanier>();
     @POST
     public void ajouterProduit(
             @FormParam("quantite") short quantite,
             @FormParam("reference") int reference
     ) {
-        ProduitPanier e = new ProduitPanier(produits.find(reference), quantite);
-        o.add(e);  
-        user.getPanier().getListeProd().addAll(o);
         
+        int verif=0;
+        ProduitPanier e = new ProduitPanier(produits.find(reference), quantite);
+        for(ProduitPanier j:user.getPanier().getListeProd()){
+            if(j.getProduitSelectionne().getReference()==reference){
+                short aQte=j.getQte();
+                short nouvelleQte=(short) (aQte+quantite);
+                j.setQte(nouvelleQte);
+                verif=1;
+            }            
+        }
+        if (verif==0){
+        o.add(e);
+        }
+        user.getPanier().getListeProd().addAll(o);
+        produitsParCategorie(produits.find(reference).getCategorie().getCode());
+        models.put("user", user);
+
 
     }
 

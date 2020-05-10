@@ -58,7 +58,7 @@
                                 <input name="reference" type="number" value="${mvc.encoders.html(produit.reference)}" hidden>
                             </form>
                         </td>
-                        
+
                     </c:if>
 
                 </tr>
@@ -66,11 +66,24 @@
         </table>
         <hr>
         <hr>
-        <h3>Code source</h3>
+        <h3>Mon Panier</h3>
+        <table border='1'>
+            <tr><th>Produits</th><th>Catégorie</th><th>Qte</th></tr>
+                    <%-- Pour chaque categorie, une ligne dans la table HTML --%>
+
+            <tr>
+                <c:forEach var="produit" items="${user.panier.listeProd}">
+                <tr>
+                    <td>${produit.produitSelectionne.nom}</td>
+                    <td>${produit.produitSelectionne.categorie.libelle}</td>
+                    <td>${produit.qte}</td>
+                    
+                </tr>
+            </c:forEach>
+
+        </table>
         <ul>
-            <li><a href="https://bitbucket.org/rbastide/comptoirs_mvc/src/test/src/main/java/controller/CategorieProduitController.java" target="_blank">Le contrôleur</a></li>
-            <li><a href="https://bitbucket.org/rbastide/comptoirs_mvc/src/test/src/main/webapp/WEB-INF/views/categorieProduits.jsp"  target="_blank">La vue</a></li>
+            <li> <a href="${pageContext.request.contextPath}/mvc/validationPanier">Valider panier</a></li>
+            <li><a href="${pageContext.request.contextPath}/mvc/editPanier">Modifier panier</a></li>
         </ul>	
-        <a href="${pageContext.request.contextPath}/mvc/validationPanier">valideer panier</a>
-         <a href="${pageContext.request.contextPath}/mvc/editPanier">Modifier panier</a>
 </html>

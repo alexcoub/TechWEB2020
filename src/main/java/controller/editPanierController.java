@@ -9,6 +9,8 @@ import Connexion.ClientConnecte;
 import Connexion.ProduitPanier;
 import comptoirs.model.dao.CommandeFacade;
 import comptoirs.model.dao.ProduitFacade;
+import java.util.ArrayList;
+import java.util.TreeSet;
 import javax.inject.Inject;
 import javax.mvc.Controller;
 import javax.mvc.Models;
@@ -48,14 +50,18 @@ public class editPanierController {
             @FormParam("reference") int reference
             ){
         
+        ProduitPanier m=new ProduitPanier(null, quantite);
+        ArrayList<ProduitPanier> ge=user.getPanier().getListeProd();
         for(ProduitPanier p:user.getPanier().getListeProd()){
-            if(p.getProduitSelectionne().getReference()==reference){
-                p.setQte(quantite);
-                if (quantite==0){
-                    user.getPanier().getListeProd().remove(p);
-                }
-            }
+            if(p.getProduitSelectionne().getReference()==reference){               
+                    p.setQte(quantite);
+                   m =p;
+            }            
         }
+        if (quantite==0){
+            user.getPanier().getListeProd().remove(m);
+        }
+        
         models.put("user",user);
             
         
