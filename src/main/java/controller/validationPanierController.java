@@ -87,6 +87,13 @@ Commande comValide = new Commande();
             LignePK lignepk=new LignePK(comValide.getNumero(),ref);
             Ligne ligne=new Ligne(lignepk, liste.getQte());
             lignes.create(ligne);
+            //On met à jour les quantités disponible et commandé
+            short unitesEnStock=produits.find(ref).getUnitesEnStock();
+            short unitesCommandees=produits.find(ref).getUnitesCommandees();
+            unitesEnStock=(short) (unitesEnStock-liste.getQte());
+            unitesCommandees=(short)(unitesCommandees+liste.getQte());
+            produits.find(ref).setUnitesEnStock(unitesEnStock);
+            produits.find(ref).setUnitesCommandees(liste.getQte());
         }
         commandes.edit(comValide);
         user.viderPanier();
